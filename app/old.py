@@ -14,16 +14,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-rooms = [
-    { "room_number": 1, "room_type": "Suite", "room_price": 1000},
-    { "room_number": 2, "room_type": "Double Bed", "room_price": 500},
-    { "room_number": 3, "room_type": "Presidential", "room_price": 10000},
-]
-
 @app.get("/")
 def read_root():
-    return { "msg": "Welcome to the hotel booking-API" }
+    return { "msg": "Wow docker" }
 
-@app.get("/rooms")
-def get_rooms():
-    return rooms
+@app.get("/hello")
+def hello():
+    return { "msg": "heyheyhey" }
+
+@app.get("/api/ip")
+def get_ip(request: Request):
+    return { "ip": request.client.host}
+
+@app.get("/ip", response_class=HTMLResponse)
+def ip(request: Request):
+    return f"<h1>Din ip är {request.client.host}</h1>"
